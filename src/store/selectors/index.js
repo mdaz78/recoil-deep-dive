@@ -1,19 +1,15 @@
 import { selector } from "recoil";
-import {
-  jobsAtom,
-  messagingAtom,
-  networkAtom,
-  notificationsAtom,
-} from "../atoms";
+import { notifications } from "../atoms";
 
 export const totalNotifications = selector({
   key: "totalNotificationSelector",
   get: ({ get }) => {
-    return (
-      get(networkAtom) +
-      get(jobsAtom) +
-      get(messagingAtom) +
-      get(notificationsAtom)
-    );
+    const notificationAtom = get(notifications);
+    let sum = 0;
+    for (let key in notificationAtom) {
+      sum += notificationAtom[key];
+    }
+
+    return sum;
   },
 });

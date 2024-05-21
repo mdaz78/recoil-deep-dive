@@ -1,10 +1,5 @@
 import { RecoilRoot, useRecoilValue } from "recoil";
-import {
-  jobsAtom,
-  messagingAtom,
-  networkAtom,
-  notificationsAtom,
-} from "./store/atoms";
+import { notifications } from "./store/atoms";
 import { totalNotifications } from "./store/selectors";
 
 function App() {
@@ -16,12 +11,16 @@ function App() {
 }
 
 function MainApp() {
-  const networkNotificationCount = useRecoilValue(networkAtom);
-  const jobsCount = useRecoilValue(jobsAtom);
-  const messagingCount = useRecoilValue(messagingAtom);
-  const notificationsCount = useRecoilValue(notificationsAtom);
+  const notificationsAtom = useRecoilValue(notifications);
 
   const totalNotificationsCount = useRecoilValue(totalNotifications);
+
+  const {
+    network: networkNotificationCount,
+    jobs: jobsCount,
+    messaging: messagingCount,
+    notifications: notificationsCount,
+  } = notificationsAtom;
 
   return (
     <>
