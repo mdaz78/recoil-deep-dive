@@ -1,11 +1,43 @@
-import { useState } from 'react'
-import './App.css'
+import { RecoilRoot, useRecoilValue } from "recoil";
+import {
+  jobsAtom,
+  messagingAtom,
+  networkAtom,
+  notificationsAtom,
+} from "./store/atoms";
+import { totalNotifications } from "./store/selectors";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-  )
+    <RecoilRoot>
+      <MainApp />
+    </RecoilRoot>
+  );
 }
 
-export default App
+function MainApp() {
+  const networkNotificationCount = useRecoilValue(networkAtom);
+  const jobsCount = useRecoilValue(jobsAtom);
+  const messagingCount = useRecoilValue(messagingAtom);
+  const notificationsCount = useRecoilValue(notificationsAtom);
+
+  const totalNotificationsCount = useRecoilValue(totalNotifications);
+
+  return (
+    <>
+      <div>
+        <button>Home</button>
+        <button>
+          My Network (
+          {networkNotificationCount > 99 ? "99+" : networkNotificationCount})
+        </button>
+        <button>Jobs ({jobsCount})</button>
+        <button>Messaging ({messagingCount})</button>
+        <button>Notifications ({notificationsCount})</button>
+        <button>Me ({totalNotificationsCount})</button>
+      </div>
+    </>
+  );
+}
+
+export default App;
