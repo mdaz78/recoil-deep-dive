@@ -1,6 +1,6 @@
 import Todo from "../components/Todo";
 
-const AtomFamily = () => {
+const AtomOrSelectorFamily = () => {
   return (
     <div>
       <Todo id={1} />
@@ -10,4 +10,4 @@ const AtomFamily = () => {
   );
 };
 
-export default AtomFamily;
+export default AtomOrSelectorFamily;
