@@ -1,41 +1,20 @@
-import { RecoilRoot, useRecoilValue } from "recoil";
-import { notifications } from "./store/atoms";
-import { totalNotifications } from "./store/selectors";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import Nav from "./components/Nav";
+import AtomFamily from "./pages/AtomFamily";
+import EasyBits from "./pages/EasyBits";
 
 function App() {
   return (
     <RecoilRoot>
-      <MainApp />
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path="/easy-bits" element={<EasyBits />} />
+          <Route path="/atom-family" element={<AtomFamily />} />
+        </Routes>
+      </BrowserRouter>
     </RecoilRoot>
-  );
-}
-
-function MainApp() {
-  const notificationsAtom = useRecoilValue(notifications);
-
-  const totalNotificationsCount = useRecoilValue(totalNotifications);
-
-  const {
-    network: networkNotificationCount,
-    jobs: jobsCount,
-    messaging: messagingCount,
-    notifications: notificationsCount,
-  } = notificationsAtom;
-
-  return (
-    <>
-      <div>
-        <button>Home</button>
-        <button>
-          My Network (
-          {networkNotificationCount > 99 ? "99+" : networkNotificationCount})
-        </button>
-        <button>Jobs ({jobsCount})</button>
-        <button>Messaging ({messagingCount})</button>
-        <button>Notifications ({notificationsCount})</button>
-        <button>Me ({totalNotificationsCount})</button>
-      </div>
-    </>
   );
 }
 
